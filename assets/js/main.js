@@ -29,15 +29,6 @@ function linkAction(){
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-/*==================== ACCORDION SKILLS ====================*/
-
-
-/*==================== QUALIFICATION TABS ====================*/
-
-
-/*==================== SERVICES MODAL ====================*/
-
-
 /*==================== PORTFOLIO SWIPER  ====================*/
 let swiper = new Swiper(".mySwiper", {
     cssMode: true,
@@ -50,9 +41,6 @@ let swiper = new Swiper(".mySwiper", {
         el: ".swiper-pagination",
     }
   });
-
-
-/*==================== TESTIMONIAL ====================*/
 
 
 /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
@@ -72,7 +60,15 @@ function scrollUP(){
     // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
     if(this.scrollY >= 560) scrollUP.classList.add('show-scroll'); else scrollUP.classList.remove('show-scroll')
 }
-window.addEventListener('scroll', scrollUP)
+window.addEventListener('scroll', function() {
+    scrollUP();
+    removeHash();
+})
+
+/*==================== REMOVE HASH FROM LINKS ====================*/ 
+function removeHash () { 
+    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+}
 
 /*==================== DARK LIGHT THEME ====================*/ 
 const themeButton = document.getElementById('theme-button')
