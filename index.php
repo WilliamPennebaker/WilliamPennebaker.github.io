@@ -1,3 +1,5 @@
+<?php include 'sendMail.php';?>
+
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -376,7 +378,7 @@
                         </div>
                     </div>
 
-                    <form action="" class="contact__form grid">
+                    <form action="" class="contact__form grid" method="POST">
                         <!--<div class="contact__inputs grid">
                             <div class="contact__content">
                                 <label for="" class="contact__label">First Name</label>
@@ -389,25 +391,37 @@
                         </div> -->
                         <div class="contact__content">
                             <label for="" class="contact__label">Full Name</label>
-                            <input type="text" class="contact__input">
+                            <input name="name" type="text" class="contact__input">
                         </div>
                         <div class="contact__content">
                             <label for="" class="contact__label">Email</label>
-                            <input type="email" class="contact__input">
+                            <input name="email" type="email" class="contact__input">
                         </div>
                         <div class="contact__content">
                             <label for="" class="contact__label">Subject</label>
-                            <input type="subject" class="contact__input">
+                            <input name="subject" type="subject" class="contact__input">
                         </div>
                         <div class="contact__content">
                             <label for="" class="contact__label">Message</label>
-                            <textarea name="" id="" cols="0" rows="7" class="contact__input" style="resize: none;"></textarea>
+                            <textarea name="message" id="" cols="0" rows="7" class="contact__input" style="resize: none;"></textarea>
                         </div>
                         <div>
-                            <a href="" class="button button--flex">
-                            Send Message
-                            <i class="uil uil-message button__icon"></i>
-                            </a>
+                            <button type="submit" name="submit" class="button button--flex">
+                                <?php
+                                    if(isset($_POST['submit'])) {
+                                        $mailto = "wpennebaker@hotmail.com";
+                                        $name = $_POST['name'];
+                                        $fromEmail = $_POST['email'];
+                                        $subject = $_POST['subject'];
+                                        $message = $_POST['message'];
+                                        $header = array("From: " . $fromEmail, "Reply-To: " . $fromEmail, "X-Mailer: PHP/" . PHP_VERSION);
+                                        $header = implode("\r\n", $header);
+                                        mail($mailto, $subject, $message, $header);
+                                    }
+                                ?>
+                                Send Message
+                                <i class="uil uil-message button__icon"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
